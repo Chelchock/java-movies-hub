@@ -62,7 +62,6 @@ public class MoviesHandler extends BaseHttpHandler {
             return;
         }
 
-        // Если путь /movies/{id}
         String[] segments = path.split("/");
         if (segments.length == 3 && !segments[2].isEmpty()) {
             try {
@@ -79,13 +78,11 @@ public class MoviesHandler extends BaseHttpHandler {
             return;
         }
 
-        // GET /movies
         List<Movie> all = store.getAll();
         sendJson(ex, 200, gson.toJson(all));
     }
 
     private void handlePost(HttpExchange ex) throws IOException {
-        // проверка Content-Type
         String contentType = ex.getRequestHeaders().getFirst("Content-Type");
         if (contentType == null || !contentType.toLowerCase().contains("application/json")) {
             sendError(ex, 415, "Неподдерживаемый тип контента");
@@ -101,7 +98,6 @@ public class MoviesHandler extends BaseHttpHandler {
             return;
         }
 
-        // валидация полей
         List<String> errors = new ArrayList<>();
         String title = null;
         if (json.has("title")) {
