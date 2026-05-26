@@ -281,7 +281,8 @@ public class MoviesApiTest {
 
     private void assertContentTypeJsonUtf8(HttpResponse<?> resp) {
         String ct = resp.headers().firstValue("Content-Type").orElse("");
-        assertTrue(ct.contains("application/json") && ct.contains("utf-8"),
+        assertTrue(ct.toLowerCase().contains("application/json") &&
+                        ct.toLowerCase().contains("utf-8"),
                 "Content-Type должен быть application/json; charset=UTF-8, но получен: " + ct);
     }
 }
